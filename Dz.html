@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./error.css">
+</head>
+<body id="body">
+
+    <h1>Введите текст</h1>
+    <br>
+    <input type="text" name="" id="texts">
+    <br>
+    <button id="check">Проверка</button>
+    <br>
+    <p id="allow" style="display: none; color: red;">Разрешены только символы кириллицы и пробел</p>
+
+    <script>
+//           const texts = document.getElementById("texts");
+//           const check = document.getElementById("check"); 
+
+
+// function kirill (texts, check) {
+//     let find = false;
+ 
+//         for(texts = "\u0410"; texts <= "\u044F"; texts++ ){
+           
+//             if(String.fromCharCode(texts)){
+//                 find = true;
+//                 break;
+//             }
+//         };
+
+//         if (find) {
+//             alert("Вы ввели значение: " + texts);
+//         };
+const texts = document.getElementById("texts");
+  const check = document.getElementById("check");
+
+  if (!check) {
+            console.error("Элемент с id 'check' не найден.");
+        };
+
+        if (!texts) {
+            console.error("Элемент с id 'texts' не найден.");
+           
+        };
+
+  function kirill () {  //функция опрееделения наличия кириллицы 
+
+    let body = document.getElementById("body")
+    let allow = document.getElementById("allow")
+    let find = false;
+    let findA = false;
+
+    if (texts.value.trim() === "") {
+                alert("Пожалуйста, введите текст.");
+            };
+
+    for (let i = 0; i < texts.value.length; i++) { 
+      const charCode = texts.value.charCodeAt(i);
+      if (charCode >= 0x0410 && charCode <= 0x044F || charCode >= 0x0400 && charCode <= 0x04FF) {
+        find = true;
+        break;
+      }
+
+
+      for (let i = 0; i < texts.value.length; i++) { 
+      const charCode = texts.value.charCodeAt(i);
+      if (charCode >= 0x40 && charCode <= 0x7E || charCode >= 0x40 && charCode <= 0x7E) {
+        findA = true;
+        break;
+      }
+    };
+    };
+
+    if (find) {
+      alert("Вы ввели значение: " + texts.value);
+    } else {
+      alert("Кириллица не обнаружена.");
+    };
+
+    if(findA){
+        texts.style.border = "2px solid red"; 
+        allow.style.display = "flex";
+        body.style.backgroundColor = "blue";
+
+    };
+
+
+    
+
+  }
+
+
+
+check.addEventListener("click", kirill)
+    </script>
+
+    
+    
+</body>
+</html>
